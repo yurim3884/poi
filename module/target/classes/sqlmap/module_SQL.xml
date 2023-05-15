@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.ddit.mapper.ModuleMapper">
+
+	<select id="selectAll" resultType="moduleVO">
+		select * from modul
+	</select>
+	
+	
+<insert id="insertExcel" parameterType="moduleVO" >
+
+          <foreach collection="excelContent" item="item" index="cellIndex" separator=" " open="INSERT All" close="SELECT * FROM DUAL" >
+                 INTO modul (id,name,gender,password,good) VALUES(
+                       #{item.A}                    
+                     , #{item.B}                         
+                     , #{item.C}                             
+                     , #{item.D}
+                     , #{item.E}
+                )
+             </foreach>
+
+   </insert>
+   
+   <select id="selectPay" resultType="pay" >
+   	select * from pay1 
+   </select>
+ 
+  <insert id="insertPay" parameterType="pay">
+  
+  insert into pay1 (PAYNO,PRODNO,PAYDETAIL,MEM_ID,PAY,MEM_ADD) VALUES (seq_pay.nextval,#{prodNo},#{payDetail},#{memId},#{pay},#{memAdd})
+  </insert>
+    
+
+</mapper>
+
+
+
